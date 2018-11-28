@@ -10,6 +10,7 @@ import java.util.stream.Collectors;
 
 
 @RestController
+@CrossOrigin
 @RequestMapping("/api/rooms")
 @Transactional
 public class RoomController {
