@@ -48,9 +48,10 @@ public class RoomController {
     }
 
     @PutMapping(path ="/{roomId}/changeLight/{lightLevel}")
-    public RoomDto changeLevel(@PathVariable Long roomId, int lightLevel){
+    public RoomDto changeLevel(@PathVariable Long roomId, String lightLevel){
         Room room = roomDao.findById(roomId).orElseThrow(IllegalArgumentException::new);
-        room.setLevel(lightLevel);
+        int level = Integer.parseInt(lightLevel);
+        room.setLevel(level);
         if(room.getStatus() == Status.OFF){
             room.setStatus(Status.ON);
         }
