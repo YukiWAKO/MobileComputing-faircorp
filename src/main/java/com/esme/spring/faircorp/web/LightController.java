@@ -35,10 +35,6 @@ public class LightController {
     public LightDto findById(@PathVariable Long id) {
         return lightDao.findById(id).map(light -> new LightDto(light)).orElse(null);
     }
-    @GetMapping(path = "/room/{roomId}")
-    public LightDto findByroomId(@PathVariable Long roomId){
-        return lightDao.findById(roomId).map(light -> new LightDto(light)).orElse(null);
-    }
 
     @PutMapping(path = "/{id}/switch")
     public LightDto switchStatus(@PathVariable Long id) {
