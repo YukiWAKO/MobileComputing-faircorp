@@ -40,6 +40,9 @@ public class LightController {
     public LightDto switchStatus(@PathVariable Long id) {
         Light light = lightDao.findById(id).orElseThrow(IllegalArgumentException::new);
         light.setStatus(light.getStatus() == Status.ON ? Status.OFF: Status.ON);
+        if(light.getStatus() == Status.ON){
+            light.getRoom().setStatus(Status.ON);
+        }
         return new LightDto(light);
     }
 
