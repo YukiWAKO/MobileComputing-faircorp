@@ -38,6 +38,11 @@ public class RoomController {
         Room room = roomDao.findById(roomId).orElseThrow(IllegalArgumentException::new);
         room.setStatus(room.getStatus() == Status.ON ? Status.OFF: Status.ON);
         room.getLights().forEach(light -> light.setStatus(room.getStatus()));
+        if(room.getStatus() == Status.OFF){
+            room.setLevel(0);
+        }else{
+            room.setLevel(50);
+        }
 //      room.getLights().forEach(light -> light.setStatus(light.getStatus() == Status.ON ? Status.OFF: Status.ON));
         return new RoomDto(room);
     }
