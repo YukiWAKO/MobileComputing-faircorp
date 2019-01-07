@@ -13,6 +13,8 @@ public class Room {
     private String name;
     @Column(nullable = false)
     private Integer level;
+    @Enumerated(EnumType.STRING)
+    private Status status;
 
     @OneToMany(mappedBy = "room")
     public List<Light> lights;
@@ -21,10 +23,12 @@ public class Room {
 
     public Room(){ }
 
-    public Room(Long id, String name, Integer level){
+    public Room(Long id, String name, Integer level, Status status){
         this.id = id;
         this.name = name;
         this.level = level;
+        this.status = status;
+
     }
 
     public Long getId() {
@@ -58,4 +62,7 @@ public class Room {
     public void setLights(List lights) {
         this.lights = lights;
     }
+
+    public Status getStatus(){return status;}
+    public void setStatus(Status status){this.status = status; }
 }

@@ -36,7 +36,9 @@ public class RoomController {
     @PutMapping(path ="/{roomId}/switch")
     public RoomDto switchStatus(@PathVariable Long roomId){
         Room room = roomDao.findById(roomId).orElseThrow(IllegalArgumentException::new);
-        room.getLights().forEach(light -> light.setStatus(light.getStatus() == Status.ON ? Status.OFF: Status.ON));
+        room.setStatus(room.getStatus() == Status.ON ? Status.OFF: Status.ON);
+        room.getLights().forEach(light -> light.setStatus(room.getStatus()));
+//      room.getLights().forEach(light -> light.setStatus(light.getStatus() == Status.ON ? Status.OFF: Status.ON));
         return new RoomDto(room);
     }
 
@@ -47,7 +49,7 @@ public class RoomController {
             room = roomDao.findById((dto.getId())).orElse(null);
         }
         if(room == null){
-            room = roomDao.save(new Room(dto.getId(), dto.getName(), dto.getLevel()));
+            room = roomDao.save(new Room(dto.getId(), dto.getName(), dto.getLevel(), dto.getStatus()));
         }
 
         return new RoomDto(room);
