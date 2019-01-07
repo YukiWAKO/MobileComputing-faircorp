@@ -16,8 +16,8 @@ public class LightDto {
 
     public LightDto(Light light) {
         this.id = light.getId();
-        this.level = light.getLevel();
-        this.status = light.getStatus();
+        this.level = light.getRoom().getLevel();
+        this.status = light.getRoom().getStatus();
         this.roomId = light.getRoom().getId();
     }
 

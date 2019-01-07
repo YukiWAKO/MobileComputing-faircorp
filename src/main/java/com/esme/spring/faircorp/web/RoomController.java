@@ -47,6 +47,19 @@ public class RoomController {
         return new RoomDto(room);
     }
 
+    @PutMapping(path ="/{roomId}/changeLight/{lightLevel}")
+    public RoomDto changeLevel(@PathVariable Long roomId, int lightLevel){
+        Room room = roomDao.findById(roomId).orElseThrow(IllegalArgumentException::new);
+        room.setLevel(lightLevel);
+        if(room.getStatus() == Status.OFF){
+            room.setStatus(Status.ON);
+        }
+        if(room.getLevel() == 0){
+            room.setStatus((Status.OFF));
+        }
+        return new RoomDto(room);
+    }
+
     @PostMapping
     public RoomDto create(@RequestBody RoomDto dto){
         Room room = null;
